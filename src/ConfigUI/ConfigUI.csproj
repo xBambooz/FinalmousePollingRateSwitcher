@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>Finalmouse.ConfigUI</RootNamespace>
+    <AssemblyName>FinalmousePollingRateConfig</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <PublishTrimmed>false</PublishTrimmed>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <ApplicationIcon>..\..\assets\ProgramIcon.ico</ApplicationIcon>
+    <Description>Finalmouse Polling Rate Switcher - Configuration</Description>
+    <Company>Finalmouse Community</Company>
+    <Product>Polling Rate Switcher Config</Product>
+    <Version>1.0.0</Version>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HidSharp" Version="2.1.0" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\shared\AppConfig.cs" Link="Shared\AppConfig.cs" />
+    <Compile Include="..\..\shared\FinalmouseHid.cs" Link="Shared\FinalmouseHid.cs" />
+    <Compile Include="..\..\shared\ServiceStatus.cs" Link="Shared\ServiceStatus.cs" />
+  </ItemGroup>
+
+  <!-- Embed icons as resources -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\assets\IdleIcon.ico" Link="Assets\IdleIcon.ico" LogicalName="IdleIcon.ico" />
+    <EmbeddedResource Include="..\..\assets\GameIcon.ico" Link="Assets\GameIcon.ico" LogicalName="GameIcon.ico" />
+    <EmbeddedResource Include="..\..\assets\ProgramIcon.ico" Link="Assets\ProgramIcon.ico" LogicalName="ProgramIcon.ico" />
+  </ItemGroup>
+
+</Project>
