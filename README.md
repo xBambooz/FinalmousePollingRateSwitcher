@@ -55,11 +55,8 @@ You can add any game — just find its process name in **Task Manager → Detail
 
 ## Important Notes
 
-- **Close Finalmouse XPanel** before running. Only one program can talk to the mouse's HID config interface at a time.
-- The config UI requires **administrator privileges** to install/manage the service.
 - Config is stored at `C:\ProgramData\FinalmousePollingRateSwitcher\config.json`
 - Logs are at `C:\ProgramData\FinalmousePollingRateSwitcher\polling_switcher.log`
-- Changes made in the config UI are picked up by the service within ~30 seconds (or click "Apply & Restart Service")
 
 ## Uninstall
 
@@ -101,7 +98,7 @@ Output goes to the `publish/` folder.
 
 ## Compatible Mice
 
-Tested with Finalmouse ULX series (VID `0x361D`, PID `0x0100`). Should work with any Finalmouse that uses the same HID polling rate protocol.
+Tested with Finalmouse ULX
 
 ## License
 
