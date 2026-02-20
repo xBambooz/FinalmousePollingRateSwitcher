@@ -2,7 +2,7 @@
 
 Automatically switches your Finalmouse ULX polling rate between **idle** (battery-saving) and **gaming** (high performance) modes based on which games you're running.
 
-Runs as a **Windows Service** — it keeps working even after you close the config tool, survives reboots, and shows up in Task Manager → Services.
+Runs as a **Windows Service** 
 
 ## How It Works
 
@@ -21,8 +21,6 @@ Grab the latest release from the [Releases](../../releases) page. You'll get two
 |------|-------------|
 | `FinalmousePollingService.exe` | The background Windows Service |
 | `FinalmousePollingRateConfig.exe` | Config UI (run this to set up) |
-
-**No installs, no runtimes, no Python** — just two `.exe` files. Place them in the same folder.
 
 ## Setup
 
