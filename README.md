@@ -1,6 +1,6 @@
 # Finalmouse Polling Rate Switcher
 
-![Downloads](https://img.shields.io/github/downloads/xBambooz/FinalmousePollingRateSwitcher/total?style=flat&label=Downloads&color=00e550) ![Release](https://img.shields.io/github/v/release/xBambooz/FinalmousePollingRateSwitcher?color=00e550) ![Windows](https://img.shields.io/badge/platform-Windows-0078D6)
+![Downloads](https://img.shields.io/github/downloads/xBambooz/FinalmousePollingRateSwitcher/total?style=flat&label=Downloads&color=00e550) ![Release](https://img.shields.io/github/v/release/xBambooz/FinalmousePollingRateSwitcher?label=Release&color=00e550) ![Platform](https://img.shields.io/badge/Platform-Windows-0078D6)
 
 Automatically switches your Finalmouse ULX polling rate between **idle** (battery-saving) and **gaming** (high performance) modes based on which games you're running.
 
