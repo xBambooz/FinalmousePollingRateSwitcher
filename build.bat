@@ -17,6 +17,9 @@ if errorlevel 1 (
 
 set OUTPUT=publish
 
+:: Kill running service if it exists (locks the exe and blocks build)
+taskkill /F /IM FinalmousePollingService.exe >nul 2>&1
+
 echo [1/3] Cleaning previous builds...
 if exist %OUTPUT% rmdir /s /q %OUTPUT%
 mkdir %OUTPUT%
@@ -52,6 +55,9 @@ if errorlevel 1 (
     pause
     exit /b 1
 )
+
+:: Clean up unnecessary .pdb files
+del /q %OUTPUT%\*.pdb >nul 2>&1
 
 echo.
 echo ============================================

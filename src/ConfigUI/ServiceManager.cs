@@ -4,19 +4,15 @@ using System.ServiceProcess;
 
 namespace Finalmouse.ConfigUI;
 
-/// <summary>
 /// Manages the FinalmousePollingRateSwitcher Windows Service lifecycle.
 /// Uses sc.exe for install/uninstall and ServiceController for start/stop/status.
-/// </summary>
 public static class ServiceManager
 {
     public const string ServiceName = "FinalmousePollingRateSwitcher";
     public const string DisplayName = "Finalmouse Polling Rate Switcher";
     public const string Description = "Automatically switches Finalmouse ULX polling rate between idle and gaming modes based on running processes.";
 
-    /// <summary>
     /// Returns the expected path to the service exe, which lives next to the config UI exe.
-    /// </summary>
     public static string GetServiceExePath()
     {
         var dir = AppDomain.CurrentDomain.BaseDirectory;

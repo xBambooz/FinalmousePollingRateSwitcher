@@ -58,8 +58,8 @@
                             <ControlTemplate TargetType="RadioButton">
                                 <Border x:Name="bd" Background="Transparent" CornerRadius="6" Padding="16,10" Cursor="Hand">
                                     <StackPanel Orientation="Horizontal">
-                                        <Path x:Name="icon" Width="30" Height="16" Stretch="Uniform"
-                                              VerticalAlignment="Center"
+                                        <Path x:Name="icon" Width="16" Height="16" Stretch="Uniform"
+                                              Margin="0,0,14,0" VerticalAlignment="Center"
                                               Data="M12,0 C7,0 3,3 3,7 L3,16 C3,20 7,24 12,24 C17,24 21,20 21,16 L21,7 C21,3 17,0 12,0 Z M11.5,2 L11.5,10 L5,10 L5,7 C5,4.2 8,2 11.5,2 Z M12.5,2 C16,2 19,4.2 19,7 L19,10 L12.5,10 Z M12,5 C11.2,5 10.5,5.7 10.5,6.5 C10.5,7.3 11.2,8 12,8 C12.8,8 13.5,7.3 13.5,6.5 C13.5,5.7 12.8,5 12,5 Z"
                                               Fill="{StaticResource TextSecondary}" />
                                         <TextBlock x:Name="txt" Text="Polling Rate" FontSize="13"
