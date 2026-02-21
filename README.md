@@ -2,7 +2,9 @@
 
 Automatically switches your Finalmouse ULX polling rate between **idle** (battery-saving) and **gaming** (high performance) modes based on which games you're running.
 
-Runs as a **Windows Service** — it keeps working even after you close the config tool, survives reboots, and shows up in Task Manager → Services.
+<img width="986" height="693" alt="FinalmousePollingRateConfig_zg045jWp5T" src="https://github.com/user-attachments/assets/98ce37ec-c4de-4a64-90e0-0e45515898aa" />
+
+Runs as a **Windows Service** 
 
 ## How It Works
 
@@ -21,8 +23,6 @@ Grab the latest release from the [Releases](../../releases) page. You'll get two
 |------|-------------|
 | `FinalmousePollingService.exe` | The background Windows Service |
 | `FinalmousePollingRateConfig.exe` | Config UI (run this to set up) |
-
-**No installs, no runtimes, no Python** — just two `.exe` files. Place them in the same folder.
 
 ## Setup
 
@@ -55,11 +55,8 @@ You can add any game — just find its process name in **Task Manager → Detail
 
 ## Important Notes
 
-- **Close Finalmouse XPanel** before running. Only one program can talk to the mouse's HID config interface at a time.
-- The config UI requires **administrator privileges** to install/manage the service.
 - Config is stored at `C:\ProgramData\FinalmousePollingRateSwitcher\config.json`
 - Logs are at `C:\ProgramData\FinalmousePollingRateSwitcher\polling_switcher.log`
-- Changes made in the config UI are picked up by the service within ~30 seconds (or click "Apply & Restart Service")
 
 ## Uninstall
 
@@ -101,7 +98,7 @@ Output goes to the `publish/` folder.
 
 ## Compatible Mice
 
-Tested with Finalmouse ULX series (VID `0x361D`, PID `0x0100`). Should work with any Finalmouse that uses the same HID polling rate protocol.
+Tested with Finalmouse ULX
 
 ## License
 
