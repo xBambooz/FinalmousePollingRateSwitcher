@@ -362,6 +362,19 @@
                                                FontSize="10" Foreground="{StaticResource TextDim}" Margin="0,2,0,0" />
                                 </StackPanel>
                             </DockPanel>
+
+                            <!-- Show Notifications (only visible when tray icon is on) -->
+                            <DockPanel Margin="0,8,0,0"
+                                       Visibility="{Binding ShowStartOnStartup, Converter={StaticResource BoolToVis}}">
+                                <CheckBox DockPanel.Dock="Right"
+                                          IsChecked="{Binding ShowNotifications}"
+                                          Style="{StaticResource DarkCheckBox}" />
+                                <StackPanel>
+                                    <TextBlock Text="Show notifications" FontSize="13" Foreground="{StaticResource TextPrimary}" />
+                                    <TextBlock Text="Show a notification when a game is detected and polling rate changes"
+                                               FontSize="10" Foreground="{StaticResource TextDim}" Margin="0,2,0,0" />
+                                </StackPanel>
+                            </DockPanel>
                         </StackPanel>
                     </Border>
                 </StackPanel>

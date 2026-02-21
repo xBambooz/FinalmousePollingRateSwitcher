@@ -95,10 +95,14 @@ public class TrayIconManager : IDisposable
                 _notifyIcon.Text = TruncateTooltip($"Finalmouse Polling Rate Switcher\n{status.CurrentRateHz}Hz — {status.GameName}");
 
                 // Brief toast notification when a game is detected
-                _notifyIcon.BalloonTipTitle = "Game Detected";
-                _notifyIcon.BalloonTipText = $"{status.GameName} → {status.CurrentRateHz}Hz";
-                _notifyIcon.BalloonTipIcon = WinForms.ToolTipIcon.Info;
-                _notifyIcon.ShowBalloonTip(2000);
+                var cfg = AppConfig.Load();
+                if (cfg.ShowNotifications)
+                {
+                    _notifyIcon.BalloonTipTitle = "Game Detected";
+                    _notifyIcon.BalloonTipText = $"{status.GameName} → {status.CurrentRateHz}Hz";
+                    _notifyIcon.BalloonTipIcon = WinForms.ToolTipIcon.Info;
+                    _notifyIcon.ShowBalloonTip(2000);
+                }
             }
             else
             {

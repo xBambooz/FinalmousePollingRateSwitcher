@@ -21,6 +21,9 @@ public class AppConfig
     [JsonPropertyName("start_on_startup")]
     public bool StartOnStartup { get; set; } = false;
 
+    [JsonPropertyName("show_notifications")]
+    public bool ShowNotifications { get; set; } = true;
+
     [JsonPropertyName("game_processes")]
     public Dictionary<string, string> GameProcesses { get; set; } = new()
     {

@@ -68,6 +68,13 @@ public class MainViewModel : INotifyPropertyChanged
         set { if (SetField(ref _startOnStartup, value)) SaveConfig(); }
     }
 
+    private bool _showNotifications;
+    public bool ShowNotifications
+    {
+        get => _showNotifications;
+        set { if (SetField(ref _showNotifications, value)) SaveConfig(); }
+    }
+
     /// <summary>Only show "Start on startup" when tray icon is enabled.</summary>
     public bool ShowStartOnStartup => ShowTrayIcon;
 
@@ -145,6 +152,7 @@ public class MainViewModel : INotifyPropertyChanged
         _scanInterval = _config.ScanIntervalSeconds;
         _showTrayIcon = _config.ShowTrayIcon;
         _startOnStartup = _config.StartOnStartup;
+        _showNotifications = _config.ShowNotifications;
 
         RefreshGamesList();
         RefreshServiceStatus();
@@ -163,6 +171,7 @@ public class MainViewModel : INotifyPropertyChanged
         _config.ScanIntervalSeconds = _scanInterval;
         _config.ShowTrayIcon = _showTrayIcon;
         _config.StartOnStartup = _startOnStartup;
+        _config.ShowNotifications = _showNotifications;
 
         _config.GameProcesses.Clear();
         foreach (var g in Games)
