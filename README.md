@@ -4,7 +4,8 @@
 
 Automatically switches your Finalmouse ULX polling rate between **idle** (battery-saving) and **gaming** (high performance) modes based on which games you're running.
 
-<img width="986" height="693" alt="FinalmousePollingRateConfig_zg045jWp5T" src="https://github.com/user-attachments/assets/98ce37ec-c4de-4a64-90e0-0e45515898aa" />
+<img width="946" height="611" alt="FinalmousePollingRateConfig_CoPBskUYEI" src="https://github.com/user-attachments/assets/8b3f69f2-b6a2-4cbc-8cd7-348fbae7ebee" />
+
 
 Runs as a **Windows Service** 
 
