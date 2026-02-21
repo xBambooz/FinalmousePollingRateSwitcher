@@ -32,7 +32,7 @@
                     <TextBlock Text="Finalmouse" FontSize="18" FontWeight="Bold" Foreground="White" />
                     <TextBlock Text="POLLING RATE SWITCHER" FontSize="10" FontWeight="Bold"
                                Foreground="{StaticResource AccentGreen}" Margin="0,2,0,0" />
-                    <TextBlock Text="v1.0.0" FontSize="10" Foreground="{StaticResource TextDim}" Margin="0,2,0,0" />
+                    <TextBlock Text="v1.0.2" FontSize="10" Foreground="{StaticResource TextDim}" Margin="0,2,0,0" />
                 </StackPanel>
 
                 <!-- Separator -->
@@ -306,26 +306,8 @@
                                         Width="120" Margin="8,0,0,0" Click="RestartService_Click"
                                         Visibility="{Binding ServiceRunning, Converter={StaticResource BoolToVis}}" />
                             </StackPanel>
-
-                            <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,12" />
-
-                            <TextBlock Text="UNINSTALL" FontSize="11" FontWeight="Bold"
-                                       Foreground="{StaticResource Danger}" Margin="0,0,0,8" />
-                            <Button Content="🗑  UNINSTALL SERVICE" Style="{StaticResource DangerButton}"
-                                    HorizontalAlignment="Left" Click="UninstallService_Click" />
                         </StackPanel>
                     </StackPanel>
-
-                    <!-- Log path info -->
-                    <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,24" />
-                    <TextBlock Text="LOG FILE" FontSize="11" FontWeight="Bold"
-                               Foreground="{StaticResource TextSecondary}" />
-                    <TextBlock x:Name="LogPathLabel" FontSize="11" Foreground="{StaticResource TextDim}" Margin="0,4,0,0"
-                               Cursor="Hand" TextDecorations="Underline" MouseLeftButtonDown="LogPath_Click" />
-                    <TextBlock Text="CONFIG FILE" FontSize="11" FontWeight="Bold"
-                               Foreground="{StaticResource TextSecondary}" Margin="0,12,0,0" />
-                    <TextBlock x:Name="ConfigPathLabel" FontSize="11" Foreground="{StaticResource TextDim}" Margin="0,4,0,0"
-                               Cursor="Hand" TextDecorations="Underline" MouseLeftButtonDown="ConfigPath_Click" />
 
                     <!-- ── Settings ── -->
                     <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,24" />
@@ -377,6 +359,26 @@
                             </DockPanel>
                         </StackPanel>
                     </Border>
+
+                    <!-- ── Uninstall ── -->
+                    <StackPanel Visibility="{Binding ServiceInstalled, Converter={StaticResource BoolToVis}}">
+                        <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,24" />
+                        <TextBlock Text="UNINSTALL" FontSize="11" FontWeight="Bold"
+                                   Foreground="{StaticResource Danger}" Margin="0,0,0,8" />
+                        <Button Content="🗑  UNINSTALL SERVICE" Style="{StaticResource DangerButton}"
+                                HorizontalAlignment="Left" Click="UninstallService_Click" />
+                    </StackPanel>
+
+                    <!-- ── File Locations ── -->
+                    <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,24" />
+                    <TextBlock Text="LOG FILE" FontSize="11" FontWeight="Bold"
+                               Foreground="{StaticResource TextSecondary}" />
+                    <TextBlock x:Name="LogPathLabel" FontSize="11" Foreground="{StaticResource TextDim}" Margin="0,4,0,0"
+                               Cursor="Hand" TextDecorations="Underline" MouseLeftButtonDown="LogPath_Click" />
+                    <TextBlock Text="CONFIG FILE" FontSize="11" FontWeight="Bold"
+                               Foreground="{StaticResource TextSecondary}" Margin="0,12,0,0" />
+                    <TextBlock x:Name="ConfigPathLabel" FontSize="11" Foreground="{StaticResource TextDim}" Margin="0,4,0,0"
+                               Cursor="Hand" TextDecorations="Underline" MouseLeftButtonDown="ConfigPath_Click" />
                 </StackPanel>
             </ScrollViewer>
 

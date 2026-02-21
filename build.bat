@@ -17,8 +17,9 @@ if errorlevel 1 (
 
 set OUTPUT=publish
 
-:: Kill running service if it exists (locks the exe and blocks build)
+:: Kill running exes if they exist (locks the exe and blocks build)
 taskkill /F /IM FinalmousePollingService.exe >nul 2>&1
+taskkill /F /IM FinalmousePollingRateConfig.exe >nul 2>&1
 
 echo [1/3] Cleaning previous builds...
 if exist %OUTPUT% rmdir /s /q %OUTPUT%
