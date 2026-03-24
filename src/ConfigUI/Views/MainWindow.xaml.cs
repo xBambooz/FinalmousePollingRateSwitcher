@@ -1,5 +1,7 @@
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -40,10 +42,15 @@ public partial class MainWindow : Window
         LogPathLabel.Text = AppConfig.GetLogPath();
         ConfigPathLabel.Text = AppConfig.GetConfigPath();
 
+        // Track game list for empty state
+        _vm.Games.CollectionChanged += Games_CollectionChanged;
+        UpdateGamesEmptyState();
+
         // ── Tray Icon ──
         _tray = new TrayIconManager();
         _tray.ShowWindowRequested += () =>
         {
+            ExitLowPowerMode();
             Show();
             WindowState = WindowState.Normal;
             Activate();
@@ -74,6 +81,7 @@ public partial class MainWindow : Window
         {
             WindowState = WindowState.Normal;
             Hide();
+            EnterLowPowerMode();
         }
     }
 
@@ -109,8 +117,11 @@ public partial class MainWindow : Window
         catch { }
     }
 
-    [System.Runtime.InteropServices.DllImport("dwmapi.dll", PreserveSig = true)]
+    [DllImport("dwmapi.dll", PreserveSig = true)]
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int value, int size);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool SetProcessWorkingSetSize(IntPtr process, nint minSize, nint maxSize);
 
     // ── Window Close / Minimize ──
 
@@ -129,8 +140,39 @@ public partial class MainWindow : Window
             // Minimize to tray: hide window, keep tray icon
             Hide();
             WindowState = WindowState.Normal; // Reset so Show() restores to normal
+            EnterLowPowerMode();
         }
         // If ShowTrayIcon is false, minimize works normally (stays in taskbar)
+    }
+
+    // ── Low Power Mode (when minimized to tray) ──
+
+    private void EnterLowPowerMode()
+    {
+        // Stop the 3-second UI status timer - no point updating UI nobody can see
+        _vm.PauseStatusPolling();
+
+        // Slow the tray icon poll from 2s to 10s
+        _tray.EnterLowPowerMode();
+
+        // Release managed memory and trim working set so the OS can page us out.
+        // This is the main technique that gets tray apps down to ~2-5 MB in Task Manager.
+        GC.Collect(2, GCCollectionMode.Aggressive, true, true);
+        GC.WaitForPendingFinalizers();
+        GC.Collect(2, GCCollectionMode.Aggressive, true, true);
+
+        try
+        {
+            SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle, -1, -1);
+        }
+        catch { }
+    }
+
+    private void ExitLowPowerMode()
+    {
+        // Restore normal polling rates
+        _vm.ResumeStatusPolling();
+        _tray.ExitLowPowerMode();
     }
 
     // ── Rate Buttons ──
@@ -214,6 +256,14 @@ public partial class MainWindow : Window
     {
         if (sender is Button btn && btn.Tag is GameEntry game)
             _vm.RemoveGame(game);
+    }
+
+    private void Games_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        => UpdateGamesEmptyState();
+
+    private void UpdateGamesEmptyState()
+    {
+        GamesEmptyState.Visibility = _vm.Games.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
     }
 
     // ── Service Control ──

@@ -22,6 +22,7 @@ public class RateButton : Border
     private static readonly SolidColorBrush BorderNormal = new(System.Windows.Media.Color.FromRgb(42, 42, 42));
     private static readonly SolidColorBrush BorderHover = new(System.Windows.Media.Color.FromRgb(58, 58, 58));
     private static readonly SolidColorBrush BgCard = new(System.Windows.Media.Color.FromRgb(22, 22, 22));
+    private static readonly SolidColorBrush BgSelected = new(System.Windows.Media.Color.FromRgb(10, 35, 15));
     private static readonly SolidColorBrush TextWhite = new(System.Windows.Media.Color.FromRgb(255, 255, 255));
     private static readonly SolidColorBrush TextDim = new(System.Windows.Media.Color.FromRgb(136, 136, 136));
 
@@ -52,6 +53,7 @@ public class RateButton : Border
         Width = 120;
         Height = 44;
         Cursor = Cursors.Hand;
+        Focusable = true;
 
         _label = new TextBlock
         {
@@ -68,6 +70,9 @@ public class RateButton : Border
         MouseEnter += (_, _) => { if (!IsSelected) BorderBrush = BorderHover; };
         MouseLeave += (_, _) => { if (!IsSelected) BorderBrush = BorderNormal; };
         MouseLeftButtonDown += (_, _) => RaiseEvent(new RoutedEventArgs(RateSelectedEvent));
+        KeyDown += (_, e) => { if (e.Key == Key.Enter || e.Key == Key.Space) RaiseEvent(new RoutedEventArgs(RateSelectedEvent)); };
+        GotKeyboardFocus += (_, _) => { if (!IsSelected) BorderBrush = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 255, 255)); };
+        LostKeyboardFocus += (_, _) => UpdateVisuals();
     }
 
     private static void OnRateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -81,12 +86,14 @@ public class RateButton : Border
         _label.Text = $"{RateHz:N0}Hz";
         if (IsSelected)
         {
+            Background = BgSelected;
             BorderBrush = AccentGreen;
             _label.Foreground = TextWhite;
             _label.FontWeight = FontWeights.Bold;
         }
         else
         {
+            Background = BgCard;
             BorderBrush = BorderNormal;
             _label.Foreground = TextDim;
             _label.FontWeight = FontWeights.Normal;

@@ -1,12 +1,17 @@
+using System.Runtime.InteropServices;
 using Finalmouse.PollingService;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+
+[DllImport("shell32.dll", SetLastError = true)]
+static extern int SetCurrentProcessExplicitAppUserModelID([MarshalAs(UnmanagedType.LPWStr)] string appId);
+SetCurrentProcessExplicitAppUserModelID("Finalmouse.PollingRateSwitcher");
 
 var builder = Host.CreateApplicationBuilder(args);
 
 builder.Services.AddWindowsService(options =>
 {
-    options.ServiceName = "FinalmousePollingRateSwitcher";
+    options.ServiceName = "FinalmousePollingService";
 });
 
 builder.Services.AddHostedService<PollingWorker>();
@@ -15,7 +20,7 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddEventLog(settings =>
 {
-    settings.SourceName = "FinalmousePollingRateSwitcher";
+    settings.SourceName = "FinalmousePollingService";
 });
 
 // Also log to file

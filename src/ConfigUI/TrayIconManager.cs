@@ -155,6 +155,18 @@ public class TrayIconManager : IDisposable
         _pollTimer.Stop();
     }
 
+    /// <summary>Slow down polling when the UI window is hidden (saves CPU).</summary>
+    public void EnterLowPowerMode()
+    {
+        _pollTimer.Interval = TimeSpan.FromSeconds(10);
+    }
+
+    /// <summary>Restore normal polling when the UI window is shown.</summary>
+    public void ExitLowPowerMode()
+    {
+        _pollTimer.Interval = TimeSpan.FromSeconds(2);
+    }
+
     public void Dispose()
     {
         _pollTimer.Stop();

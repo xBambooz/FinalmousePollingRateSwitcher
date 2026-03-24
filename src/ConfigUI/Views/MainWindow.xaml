@@ -41,11 +41,14 @@
                 <!-- Bottom: Service Status -->
                 <StackPanel DockPanel.Dock="Bottom" Margin="16,0,16,16">
                     <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,0,0,12" />
-                    <TextBlock FontSize="12" Foreground="{Binding ServiceRunning, Converter={StaticResource BoolToColor}}">
-                        <Run Text="●" /> <Run Text="{Binding ServiceStatusText, Mode=OneWay}" FontSize="10" FontWeight="Bold" />
-                    </TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="8" Height="8" CornerRadius="4" VerticalAlignment="Center"
+                                Background="{Binding ServiceRunning, Converter={StaticResource BoolToColor}}" />
+                        <TextBlock Text="{Binding ServiceStatusText}" FontSize="10" FontWeight="Bold"
+                                   Foreground="{StaticResource TextSecondary}" Margin="8,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
                     <TextBlock Text="{Binding LastLogLine}" FontSize="10"
-                               Foreground="{StaticResource TextDim}" Margin="0,2,0,0"
+                               Foreground="{StaticResource TextDim}" Margin="0,4,0,0"
                                TextTrimming="CharacterEllipsis" />
                 </StackPanel>
 
@@ -90,9 +93,11 @@
                             <ControlTemplate TargetType="RadioButton">
                                 <Border x:Name="bd" Background="Transparent" CornerRadius="6" Padding="16,10" Cursor="Hand">
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock x:Name="icon" Text="🎮" FontSize="14" Width="30"
-                                                   Foreground="{StaticResource TextSecondary}" VerticalAlignment="Center" />
-                                        <TextBlock x:Name="txt" Text="Game Profiles" FontSize="14"
+                                        <Path x:Name="icon" Width="16" Height="16" Stretch="Uniform"
+                                              Margin="0,0,14,0" VerticalAlignment="Center"
+                                              Data="M2,4 L2,20 C2,21.1 2.9,22 4,22 L20,22 C21.1,22 22,21.1 22,20 L22,8 C22,6.9 21.1,6 20,6 L12,6 L10,4 Z M6,14 L6,12 L8,12 L8,14 Z M10,14 L10,12 L12,12 L12,14 Z M14,14 L14,12 L16,12 L16,14 Z M6,18 L6,16 L8,16 L8,18 Z M10,18 L10,16 L12,16 L12,18 Z M14,18 L14,16 L16,16 L16,18 Z"
+                                              Fill="{StaticResource TextSecondary}" />
+                                        <TextBlock x:Name="txt" Text="Game Profiles" FontSize="13"
                                                    Foreground="{StaticResource TextSecondary}" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </Border>
@@ -100,7 +105,7 @@
                                     <Trigger Property="IsChecked" Value="True">
                                         <Setter TargetName="bd" Property="Background" Value="{StaticResource SelectedBg}" />
                                         <Setter TargetName="txt" Property="Foreground" Value="White" />
-                                        <Setter TargetName="icon" Property="Foreground" Value="{StaticResource AccentGreen}" />
+                                        <Setter TargetName="icon" Property="Fill" Value="{StaticResource AccentGreen}" />
                                     </Trigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
@@ -120,9 +125,11 @@
                             <ControlTemplate TargetType="RadioButton">
                                 <Border x:Name="bd" Background="Transparent" CornerRadius="6" Padding="16,10" Cursor="Hand">
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock x:Name="icon" Text="⚙" FontSize="14" Width="30"
-                                                   Foreground="{StaticResource TextSecondary}" VerticalAlignment="Center" />
-                                        <TextBlock x:Name="txt" Text="Service" FontSize="14"
+                                        <Path x:Name="icon" Width="16" Height="16" Stretch="Uniform"
+                                              Margin="0,0,14,0" VerticalAlignment="Center"
+                                              Data="M12,15.5 C10.07,15.5 8.5,13.93 8.5,12 C8.5,10.07 10.07,8.5 12,8.5 C13.93,8.5 15.5,10.07 15.5,12 C15.5,13.93 13.93,15.5 12,15.5 Z M19.43,12.97 C19.47,12.65 19.5,12.33 19.5,12 C19.5,11.67 19.47,11.34 19.43,11.02 L21.54,9.37 C21.73,9.22 21.78,8.95 21.66,8.73 L19.66,5.27 C19.54,5.05 19.27,4.96 19.05,5.05 L16.56,6.05 C16.04,5.66 15.5,5.32 14.87,5.07 L14.5,2.42 C14.46,2.18 14.25,2 14,2 L10,2 C9.75,2 9.54,2.18 9.5,2.42 L9.13,5.07 C8.5,5.32 7.96,5.66 7.44,6.05 L4.95,5.05 C4.73,4.96 4.46,5.05 4.34,5.27 L2.34,8.73 C2.21,8.95 2.27,9.22 2.46,9.37 L4.57,11.02 C4.53,11.34 4.5,11.67 4.5,12 C4.5,12.33 4.53,12.65 4.57,12.97 L2.46,14.63 C2.27,14.78 2.21,15.05 2.34,15.27 L4.34,18.73 C4.46,18.95 4.73,19.04 4.95,18.95 L7.44,17.95 C7.96,18.34 8.5,18.68 9.13,18.93 L9.5,21.58 C9.54,21.82 9.75,22 10,22 L14,22 C14.25,22 14.46,21.82 14.5,21.58 L14.87,18.93 C15.5,18.67 16.04,18.34 16.56,17.95 L19.05,18.95 C19.27,19.04 19.54,18.95 19.66,18.73 L21.66,15.27 C21.78,15.05 21.73,14.78 21.54,14.63 Z"
+                                              Fill="{StaticResource TextSecondary}" />
+                                        <TextBlock x:Name="txt" Text="Service" FontSize="13"
                                                    Foreground="{StaticResource TextSecondary}" VerticalAlignment="Center" />
                                     </StackPanel>
                                 </Border>
@@ -130,7 +137,7 @@
                                     <Trigger Property="IsChecked" Value="True">
                                         <Setter TargetName="bd" Property="Background" Value="{StaticResource SelectedBg}" />
                                         <Setter TargetName="txt" Property="Foreground" Value="White" />
-                                        <Setter TargetName="icon" Property="Foreground" Value="{StaticResource AccentGreen}" />
+                                        <Setter TargetName="icon" Property="Fill" Value="{StaticResource AccentGreen}" />
                                     </Trigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
@@ -162,23 +169,23 @@
 
                     <!-- Idle Rate -->
                     <TextBlock Text="IDLE POLLING RATE" FontSize="11" FontWeight="Bold"
-                               Foreground="{StaticResource TextSecondary}" Margin="0,28,0,0" />
+                               Foreground="{StaticResource TextSecondary}" Margin="0,32,0,0" />
                     <TextBlock Text="Used when no game is running (saves battery)"
-                               FontSize="10" Foreground="{StaticResource TextDim}" Margin="0,2,0,10" />
+                               FontSize="10" Foreground="{StaticResource TextDim}" Margin="0,4,0,8" />
                     <StackPanel x:Name="IdleRatePanel" Orientation="Horizontal" />
 
                     <!-- Gaming Rate -->
                     <TextBlock Text="GAMING POLLING RATE" FontSize="11" FontWeight="Bold"
-                               Foreground="{StaticResource TextSecondary}" Margin="0,28,0,0" />
+                               Foreground="{StaticResource TextSecondary}" Margin="0,32,0,0" />
                     <TextBlock Text="Activated when a game process is detected"
-                               FontSize="10" Foreground="{StaticResource TextDim}" Margin="0,2,0,10" />
+                               FontSize="10" Foreground="{StaticResource TextDim}" Margin="0,4,0,8" />
                     <StackPanel x:Name="GamingRatePanel" Orientation="Horizontal" />
 
                     <!-- Scan Interval -->
                     <TextBlock Text="SCAN INTERVAL" FontSize="11" FontWeight="Bold"
-                               Foreground="{StaticResource TextSecondary}" Margin="0,28,0,0" />
+                               Foreground="{StaticResource TextSecondary}" Margin="0,32,0,0" />
                     <TextBlock Text="How often to check for running games"
-                               FontSize="10" Foreground="{StaticResource TextDim}" Margin="0,2,0,10" />
+                               FontSize="10" Foreground="{StaticResource TextDim}" Margin="0,4,0,8" />
                     <ComboBox x:Name="IntervalCombo" Width="140" Height="32" HorizontalAlignment="Left"
                              Style="{StaticResource DarkComboBox}"
                              SelectionChanged="IntervalCombo_SelectionChanged">
@@ -189,8 +196,8 @@
                     </ComboBox>
 
                     <!-- Quick action: Apply changes to running service -->
-                    <Button Content="↻  APPLY &amp; RESTART SERVICE" Style="{StaticResource AccentButton}"
-                            Margin="0,28,0,0" HorizontalAlignment="Left" Padding="24,10"
+                    <Button Content="APPLY &amp; RESTART SERVICE" Style="{StaticResource AccentButton}"
+                            Margin="0,32,0,0" HorizontalAlignment="Left" Padding="24,10"
                             Click="RestartService_Click"
                             Visibility="{Binding ServiceRunning, Converter={StaticResource BoolToVis}}" />
                 </StackPanel>
@@ -223,6 +230,23 @@
 
                             <Button Content="+ ADD" Style="{StaticResource AccentButton}"
                                     Height="32" Padding="16,0" Click="AddGame_Click" />
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Empty state -->
+                    <Border x:Name="GamesEmptyState" Background="{StaticResource BgCard}" CornerRadius="8"
+                            BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                            Padding="32,40" Margin="0,16,0,0" HorizontalAlignment="Stretch"
+                            Visibility="Collapsed">
+                        <StackPanel HorizontalAlignment="Center">
+                            <Path Width="32" Height="32" Stretch="Uniform" HorizontalAlignment="Center"
+                                  Data="M2,4 L2,20 C2,21.1 2.9,22 4,22 L20,22 C21.1,22 22,21.1 22,20 L22,8 C22,6.9 21.1,6 20,6 L12,6 L10,4 Z M12,11 L14,11 L14,13 L12,13 Z M12,15 L14,15 L14,17 L12,17 Z M8,11 L10,11 L10,13 L8,13 Z"
+                                  Fill="{StaticResource TextDim}" />
+                            <TextBlock Text="No game profiles yet" FontSize="14" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextSecondary}" HorizontalAlignment="Center" Margin="0,12,0,0" />
+                            <TextBlock Text="Add a game executable above to enable automatic polling rate switching."
+                                       FontSize="11" Foreground="{StaticResource TextDim}" HorizontalAlignment="Center"
+                                       TextAlignment="Center" Margin="0,4,0,0" TextWrapping="Wrap" />
                         </StackPanel>
                     </Border>
 
@@ -260,19 +284,20 @@
                             BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="20,16">
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="14" Foreground="{Binding ServiceRunning, Converter={StaticResource BoolToColor}}">
-                                    <Run Text="●" FontSize="16" />
-                                </TextBlock>
+                                <Border Width="10" Height="10" CornerRadius="5" VerticalAlignment="Center"
+                                        Background="{Binding ServiceRunning, Converter={StaticResource BoolToColor}}" />
                                 <TextBlock Text="{Binding ServiceStatusText}" FontSize="14" FontWeight="Bold"
-                                           Foreground="White" Margin="8,0,0,0" VerticalAlignment="Center" />
+                                           Foreground="White" Margin="10,0,0,0" VerticalAlignment="Center" />
+                                <Border CornerRadius="4" Padding="8,2" Margin="12,0,0,0" VerticalAlignment="Center"
+                                        Background="{Binding ServiceRunning, Converter={StaticResource BoolToColor}}" Opacity="0.15" />
                             </StackPanel>
                             <TextBlock Text="{Binding LastLogLine}" FontSize="11" Foreground="{StaticResource TextDim}"
-                                       Margin="0,6,0,0" TextTrimming="CharacterEllipsis" />
+                                       Margin="0,8,0,0" TextTrimming="CharacterEllipsis" />
                         </StackPanel>
                     </Border>
 
                     <!-- Action Buttons -->
-                    <StackPanel Margin="0,20,0,0">
+                    <StackPanel Margin="0,24,0,0">
 
                         <!-- Not installed state -->
                         <StackPanel Visibility="{Binding ServiceNotInstalled, Converter={StaticResource BoolToVis}}">
@@ -283,7 +308,7 @@
                                     <TextBlock Text="INSTALL SERVICE" FontSize="11" FontWeight="Bold"
                                                Foreground="{StaticResource TextSecondary}" />
                                     <TextBlock FontSize="11" Foreground="{StaticResource TextDim}" Margin="0,6,0,12" TextWrapping="Wrap">
-                                        This will register a Windows Service named "FinalmousePollingRateSwitcher" that starts
+                                        This will register a Windows Service named "Finalmouse Polling Rate Switcher Server" that starts
                                         automatically with Windows. It appears in Task Manager → Services. You can close this
                                         config tool and the service will keep running.
                                     </TextBlock>
@@ -365,7 +390,7 @@
                         <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,24" />
                         <TextBlock Text="UNINSTALL" FontSize="11" FontWeight="Bold"
                                    Foreground="{StaticResource Danger}" Margin="0,0,0,8" />
-                        <Button Content="🗑  UNINSTALL SERVICE" Style="{StaticResource DangerButton}"
+                        <Button Content="UNINSTALL SERVICE" Style="{StaticResource DangerButton}"
                                 HorizontalAlignment="Left" Click="UninstallService_Click" />
                     </StackPanel>
 

@@ -162,6 +162,16 @@ public class MainViewModel : INotifyPropertyChanged
         _statusTimer.Start();
     }
 
+    /// <summary>Stop polling service status (call when window is hidden to save resources).</summary>
+    public void PauseStatusPolling() => _statusTimer.Stop();
+
+    /// <summary>Resume polling and immediately refresh (call when window becomes visible).</summary>
+    public void ResumeStatusPolling()
+    {
+        RefreshServiceStatus();
+        _statusTimer.Start();
+    }
+
     // ── Config Persistence ──
 
     private void SaveConfig()

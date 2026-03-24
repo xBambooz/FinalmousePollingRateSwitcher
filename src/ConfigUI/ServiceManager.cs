@@ -8,15 +8,46 @@ namespace Finalmouse.ConfigUI;
 /// Uses sc.exe for install/uninstall and ServiceController for start/stop/status.
 public static class ServiceManager
 {
-    public const string ServiceName = "FinalmousePollingRateSwitcher";
-    public const string DisplayName = "Finalmouse Polling Rate Switcher";
+    public const string ServiceName = "FinalmousePollingService";
+    public const string DisplayName = "Finalmouse Polling Rate Switcher Server";
     public const string Description = "Automatically switches Finalmouse ULX polling rate between idle and gaming modes based on running processes.";
 
-    /// Returns the expected path to the service exe, which lives next to the config UI exe.
+    /// Returns the path to the service exe.
+    /// In a published/release layout both exes live side by side.
+    /// During development (VS debug) the service builds to its own output folder,
+    /// so we walk up to the repo and find it there.
     public static string GetServiceExePath()
     {
-        var dir = AppDomain.CurrentDomain.BaseDirectory;
-        return Path.Combine(dir, "FinalmousePollingService.exe");
+        var dir = AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+
+        // 1. Same folder (published layout)
+        var sameDir = Path.Combine(dir, "FinalmousePollingService.exe");
+        if (File.Exists(sameDir))
+            return sameDir;
+
+        // 2. Sibling project output (VS debug layout)
+        //    ConfigUI runs from: src/ConfigUI/bin/{Config}/{TFM}/{RID}/
+        //    Service builds to:  src/PollingService/bin/{Config}/{TFM}/{RID}/
+        //    Walk up 4 levels: win-x64 -> net8.0-windows -> Debug -> bin -> ConfigUI
+        var configUiSrc = dir;
+        for (int i = 0; i < 4; i++)
+        {
+            var parent = Directory.GetParent(configUiSrc);
+            if (parent == null) break;
+            configUiSrc = parent.FullName;
+        }
+        // configUiSrc should now be src/ConfigUI — go to sibling PollingService
+        var serviceSrc = Path.Combine(Path.GetDirectoryName(configUiSrc) ?? "", "PollingService");
+        if (Directory.Exists(serviceSrc))
+        {
+            var relPath = Path.GetRelativePath(configUiSrc, dir);
+            var candidate = Path.Combine(serviceSrc, relPath, "FinalmousePollingService.exe");
+            if (File.Exists(candidate))
+                return candidate;
+        }
+
+        // Fallback: return the same-folder path (will show a clear error to the user)
+        return sameDir;
     }
 
     public static bool IsInstalled()

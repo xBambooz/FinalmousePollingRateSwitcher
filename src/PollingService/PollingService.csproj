@@ -12,9 +12,9 @@
     <SelfContained>true</SelfContained>
     <PublishTrimmed>false</PublishTrimmed>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-    <Description>Finalmouse Polling Rate Switcher - Background Service</Description>
+    <Description>Finalmouse Polling Rate Switcher</Description>
     <Company>Finalmouse Community</Company>
-    <Product>Polling Rate Switcher</Product>
+    <Product>Finalmouse Polling Rate Switcher</Product>
     <Version>1.0.0</Version>
   </PropertyGroup>
 

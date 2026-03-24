@@ -6,4 +6,5 @@ publish/
 *.suo
 *.psd
 *.zip
+*.bat
 .claude/

@@ -15,9 +15,9 @@
     <PublishTrimmed>false</PublishTrimmed>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <ApplicationIcon>..\..\assets\ProgramIcon.ico</ApplicationIcon>
-    <Description>Finalmouse Polling Rate Switcher - Configuration</Description>
+    <Description>Finalmouse Polling Rate Switcher</Description>
     <Company>Finalmouse Community</Company>
-    <Product>Polling Rate Switcher Config</Product>
+    <Product>Finalmouse Polling Rate Switcher</Product>
     <Version>1.0.0</Version>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
@@ -38,6 +38,14 @@
     <EmbeddedResource Include="..\..\assets\IdleIcon.ico" Link="Assets\IdleIcon.ico" LogicalName="IdleIcon.ico" />
     <EmbeddedResource Include="..\..\assets\GameIcon.ico" Link="Assets\GameIcon.ico" LogicalName="GameIcon.ico" />
     <EmbeddedResource Include="..\..\assets\ProgramIcon.ico" Link="Assets\ProgramIcon.ico" LogicalName="ProgramIcon.ico" />
+  </ItemGroup>
+
+  <!-- Ensure PollingService builds before ConfigUI so Install works during debug -->
+  <ItemGroup>
+    <ProjectReference Include="..\PollingService\PollingService.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <Private>false</Private>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>
